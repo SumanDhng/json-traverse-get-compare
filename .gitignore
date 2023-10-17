@@ -1,0 +1,8 @@
+# Ignore these
+/*
+
+
+# DO NOT IGNORE THESE FILES:
+!*.gs
+!.gitignore
+!*.md
