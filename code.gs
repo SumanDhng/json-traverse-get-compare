@@ -1,7 +1,11 @@
 // Function to parse JSON data, ensuring single quotes are properly handled
 function ParseJson(jsonObj) {
-  validJsonData = jsonObj.replace(/"([^']*)'([^"]*)"/g, '"$1\\"$2"'); // Replace single quotes within double quotes with escaped single quotes
-  validJsonData = validJsonData.replace(/'/g, '"'); // Replace all remaining single quotes with double quotes
+  // Replaces double quotes within single quotes with escaped double quotes. And Replaces wrapped single quotes with double quotes
+  jsonObj = jsonObj.replace(/'([^']*)"([^']*)"'/g, '"$1\\"$2"');
+  // Replaces escaped single quotes with escaped dpouble quotes followed by replacing double quote with escaped double quote within wrapped single quotes into double quotes
+  jsonObj = jsonObj.replace(/'([^']*)\\'([^']*)\\'([^"])"([^']*)'/g, '"$1\\"$2\\"$3\\"$4"');
+  jsonObj = jsonObj.replace(/"([^']*)'([^']*)"/g, '"$1\\"$2"'); // Replace single quotes within double quotes with escaped double quotes
+  validJsonData = jsonObj.replace(/'/g, '"'); // Replace all remaining single quotes with double quotes
   parsedData = JSON.parse(validJsonData);  // Parse the valid JSON data
   return parsedData;
 }

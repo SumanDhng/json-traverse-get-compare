@@ -5,7 +5,14 @@ This Google Apps Script (GAS) includes several functions to parse and compare JS
 ## Functions
 
 1. ParseJson(jsonObj)
-This function ensures proper handling of single quotes within JSON data by replacing single quotes with double quotes. It then parses the valid JSON data and returns the parsed result.
+This function ensures proper handling of single quotes within JSON data by
+- Replaces double quotes within single quotes with escaped double quotes within single quotes with double quotes
+- Replaces escaped single quotes with escaped double quotes, followed by replacing double quotes within single quotes with escaped double quotes.
+- Replace single quotes within double quotes with escaped double quotes
+- Replaces all remaining single quotes with double quotes.
+
+Finally, it parses the modified JSON data and returns the parsed result.
+
 
 2. TraverseJson(jsonObj, path)
 This function is used to traverse a JSON object using the specified path. It splits the path into individual keys and recursively explores the JSON structure, extracting the desired data.
